@@ -9,14 +9,14 @@ Wrong.config.alias_assert :expect_that
 include WebMock::API
 
 def auth
-  {display_name: "Captain Ron",
-   username: "isthegreatestmoviever",
-   user_id: "31337",
-   is_anonymous: 0,
-   access_token: "access_token1234",
-   scope: nil,
-   expires_in: 3600,
-   refresh_token: "refresh_token1234"}
+  {'display_name' => 'Captain Ron',
+   'username' => 'isthegreatestmoviever',
+   'user_id' => '31337',
+   'is_anonymous' => 0,
+   'access_token' => 'access_token1234',
+   'scope' => nil,
+   'expires_in' => 3600,
+   'refresh_token' => 'refresh_token1234'}
 end
 
 def app
@@ -75,12 +75,12 @@ describe 'A mock app' do
 
   it 'calls successfully' do
     stub_request(:get, "https://api.geoloqi.com/1/account/profile").
-      with(:headers => {'Authorization'=>'OAuth access_token1234'}).
-      to_return(:status => 200, :body => {result: 'ok'}.to_json, :headers => {})
+      with(:headers => {'Authorization' => 'OAuth access_token1234'}).
+      to_return(:status => 200, :body => {'result' => 'ok'}.to_json, :headers => {})
     
-    get '/calltest', {}, 'rack.session' => {_geoloqi_auth: auth}
+    get '/calltest', {}, 'rack.session' => {:'_geoloqi_auth' => auth}
 
-    expect_that { last_response.ok? }
+    expect_that { last_response.status == 200 }
     expect_that { last_response.body == 'ok' }
   end
 end
