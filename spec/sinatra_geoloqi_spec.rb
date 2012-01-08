@@ -2,9 +2,7 @@ ENV['RACK_ENV'] = 'test'
 require File.join(File.join(File.expand_path(File.dirname(__FILE__))), '..', 'lib', 'sinatra', 'geoloqi')
 require 'rack/test'
 require 'minitest/autorun'
-require 'wrong/adapters/minitest'
 require 'webmock'
-Wrong.config.alias_assert :expect_that
 
 include WebMock::API
 
@@ -42,7 +40,7 @@ def app
     
     get '/calltest' do
       require_geoloqi_login
-      geoloqi.get('account/profile')['result']
+      geoloqi.get('account/profile')[:result]
     end
   end
 end
@@ -52,25 +50,27 @@ describe 'A mock app' do
 
   it 'returns geoloqi object' do
     get '/'
-    expect_that { last_response.ok? }
-    expect_that { last_response.body == 'Geoloqi::Session' }
+    last_response.ok?.must_equal true
+    last_response.body.must_equal 'Geoloqi::Session'
   end
 
   it 'returns a geoloqi object on request' do
     get '/redirect'
-    expect_that { last_response.redirect? }
-    expect_that { last_response.headers['Location'] == 'https://geoloqi.com/oauth/authorize?response_type=code&client_id=ABCD&redirect_uri=http%3A%2F%2Fexample.org%2Ftest' }
+    last_response.redirect?.must_equal true
+    last_response.headers['Location'].must_equal 'https://geoloqi.com/oauth/authorize?response_type=code&client_id=ABCD&'+
+                                                 'redirect_uri=http%3A%2F%2Fexample.org%2Ftest'
   end
 
   it 'processes the geoloqi return' do
     stub_request(:post, "https://api.geoloqi.com/1/oauth/token").
-      with(:body => "{\"client_id\":\"ABCD\",\"client_secret\":\"EFGH\",\"grant_type\":\"authorization_code\",\"code\":\"code1234\",\"redirect_uri\":\"http://example.org/test\"}").
+      with(:body => "{\"client_id\":\"ABCD\",\"client_secret\":\"EFGH\",\"grant_type\":\"authorization_code\",\"code\":\"code1234\","+
+                    "\"redirect_uri\":\"http://example.org/test\"}").
       to_return(:status => 200,
                 :body => auth.to_json)
-    
+
     get '/test?state=&code=code1234'
-    expect_that { last_response.ok? }
-    expect_that { last_response.body == 'access_token1234' }
+    last_response.ok?.must_equal true
+    last_response.body.must_equal 'access_token1234'
   end
 
   it 'calls successfully' do
@@ -80,7 +80,7 @@ describe 'A mock app' do
     
     get '/calltest', {}, 'rack.session' => {:'_geoloqi_auth' => auth}
 
-    expect_that { last_response.status == 200 }
-    expect_that { last_response.body == 'ok' }
+    last_response.status.must_equal 200
+    last_response.body.must_equal 'ok'
   end
 end

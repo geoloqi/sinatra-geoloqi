@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rack-test', '= 0.5.7'
-  s.add_development_dependency 'wrong',     '= 0.5.0'
   s.add_development_dependency 'webmock',   '= 1.7.7'
   s.add_development_dependency 'minitest'
 end
