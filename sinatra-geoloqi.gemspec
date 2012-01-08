@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'sinatra-geoloqi'
-  s.version = '0.9.1'
+  s.version = '0.9.2'
   s.authors = ['Kyle Drake']
   s.email = ['kyledrake@gmail.com']
   s.homepage = 'https://github.com/geoloqi/sinatra-geoloqi'
