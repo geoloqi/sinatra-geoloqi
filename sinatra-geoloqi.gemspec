@@ -13,10 +13,10 @@ Gem::Specification.new do |s|
   s.rubyforge_project = s.name
   s.required_rubygems_version = '>= 1.3.4'
   s.add_dependency 'sinatra',   '>= 1.0'
-  s.add_dependency 'geoloqi',   '>= 0.9.33'
+  s.add_dependency 'geoloqi',   '>= 0.9.36'
 
   s.add_development_dependency 'rake'
-  s.add_development_dependency 'rack-test', '= 0.5.7'
-  s.add_development_dependency 'webmock',   '= 1.7.7'
+  s.add_development_dependency 'rack-test', '= 0.6.1'
+  s.add_development_dependency 'webmock',   '= 1.7.10'
   s.add_development_dependency 'minitest'
 end
