@@ -26,7 +26,7 @@ Then, you can use it like this. This is the standard way with classic mode:
     end
     
     get '/?' do
-      username = geoloqi.get('account/username')['username']
+      username = geoloqi.get('account/username')[:username]
       "You have successfully logged in as #{username}!"
     end
 
