@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'sinatra-geoloqi'
-  s.version = '0.9.3'
+  s.version = '0.9.4'
   s.authors = ['Kyle Drake']
   s.email = ['kyledrake@gmail.com']
   s.homepage = 'https://github.com/geoloqi/sinatra-geoloqi'
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = s.name
   s.required_rubygems_version = '>= 1.3.4'
   s.add_dependency 'sinatra',   '>= 1.0'
-  s.add_dependency 'geoloqi',   '>= 0.9.36'
+  s.add_dependency 'geoloqi',   '>= 0.9.39'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rack-test', '= 0.6.1'
